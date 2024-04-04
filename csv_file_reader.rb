@@ -1,6 +1,6 @@
 require 'csv'
 
-class CSVFileReaderz
+class CSVFileReader
 
   def self.inherited(subclass)
     file_path = "#{subclass.name.downcase}s.csv"
