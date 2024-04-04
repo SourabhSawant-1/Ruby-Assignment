@@ -1,36 +1,41 @@
 require_relative "csv_file_reader"
 
+
 class Student < CSVFileReader
-end 
-
-s1= Student.new 
-# s1.student_id= 3
-# s1.student_name = "kiran"
-# s1.teacher_name = "manoj"
-# s1.subject= "maths"
-
-# s1.student_id = 10
-# s1.student_name = "Amit"
-# s1.teacher_name = "Shilesh"
-# s1.subject = "Physics"
-
-
-# sd1= Student.find_by("student_id", 3)
-# p sd1
-
+end
 
 class State < CSVFileReader
-end 
+end
 
-s1= State.new 
-s1.name = "Maharashtra"
-s1.capital = "mumbai"
-s1.population = "10crore"
+class Country < CSVFileReader
+end
 
-# st.name = "Bihar"
-# st.capital = "Patna"
-# st.population = "22Crore"
+s = Student.new
+s.student_id = 10
+s.student_name = "Amit"
+s.teacher_name = "Shailesh"
+s.subject = "Physics"
+p s
 
+puts 
 
-# state = State.find_by("name","bihar")
-# puts state.capital
+s1 = Student.find_by("student_id", 3)
+# p s1
+puts s1.student_name # this should print kiran
+puts s1.teacher_name # this should print manoj
+
+puts
+
+st = State.new
+st.name = "Bihar"
+st.capital = "Patna"
+st.population = "22Crore"
+p st
+
+puts
+
+st1 = State.find_by("name", "Karnataka")
+# p st1
+puts st1.capital # this should print bangalore
+puts st1.population # this should print 6crore
+
