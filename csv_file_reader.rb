@@ -4,23 +4,19 @@ class CSVFileReader
 
   def self.inherited(subclass)
     file_path = "#{subclass.name.downcase}s.csv"
-
+    
     if File.exist?(file_path)
       headers = CSV.read(file_path, headers: true).headers
-    
-      headers.each do |header|
-        # Dynamically defining attribute accessors based on CSV headers
-        subclass.class_eval do
-          attr_accessor header.to_sym
-        end
+      # Dynamically defining attribute accessors based on CSV headers
+      subclass.class_eval do
+          attr_accessor *headers
       end
     end
   end
 
 
   def self.find_by(header, value)
-    file_path = "#{name.downcase}s.csv"
-    CSV.foreach(file_path, headers: true, header_converters: :symbol) do |row|
+    CSV.foreach("#{self.to_s.downcase}s.csv", headers: true, header_converters: :symbol) do |row|
       if row[header.to_sym].to_s == value.to_s
         obj = new
         row.to_h.each do |k, v|
@@ -30,8 +26,7 @@ class CSVFileReader
       end
     end
     nil
-  end
-  
+  end 
 end
 
 
@@ -44,7 +39,3 @@ end
 #     csv << existing_headers.map { |header| send(header) }
 #   end
 # end
-
- # def self.file_path
-  #   "#{name.downcase}s.csv" 
-  # end
